@@ -1,7 +1,10 @@
-
+import os
+import os.path
 import json
 import web
 import psycopg2
+
+os.chdir (os.path.abspath (os.path.dirname(__file__)))
 
 urls = (
     '/',    'root',
@@ -23,7 +26,7 @@ for i in files.keys():
 
 class list:
     def GET (self):
-        conn = psycopg2.connect ('dbname = books')
+        conn = psycopg2.connect ('dbname = books user=postgres')
         cur = conn.cursor ()
         cur.execute ('select author, title, isbn from books.book')
         r = cur.fetchall ()
@@ -51,6 +54,7 @@ class root:
         return files ['index.html']
 
 app = web.application (urls, globals())
+application = app.wsgifunc()
 
 if __name__ == '__main__':
     app.run()

@@ -30,7 +30,7 @@ j<script type="text/javascript" src="jquery.dataTables.min.js"></script>
 <script>
 
 function loadLibrary () {
-    $.getJSON('/list', function(data) {
+    $.getJSON('list', function(data) {
         var items = [];
 
         $.each(data, function(key, val) {
