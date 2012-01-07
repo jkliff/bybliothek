@@ -1,0 +1,55 @@
+<html>
+
+<head><title>Biblioteca</title></head>
+<style>
+body {
+    font-family: sans-serif;
+    font-size: 10pt;
+}
+
+#books {
+    font-size: 10pt;
+}
+</style>
+<body>
+
+<h1>Biblioteca</h1>
+
+<hr>
+
+<div id="tbl_placeholder">
+    <table id="books">
+        <thead><th></th><th>Autor</th><th>Título</th><th>ISBN</th></thead>
+    </table>
+</div>
+
+</body>
+
+<script type="text/javascript" src="jquery.js"></script>
+j<script type="text/javascript" src="jquery.dataTables.min.js"></script>
+<script>
+
+function loadLibrary () {
+    $.getJSON('/list', function(data) {
+        var items = [];
+
+        $.each(data, function(key, val) {
+            $('#books').dataTable().fnAddData([key, val[0], val[1], val[2]]);
+
+        });
+    });
+}
+
+$(document).ready(function() {
+    $('#books').dataTable({
+        'asSorting': [[2, 'asc']],
+        "sPaginationType": "full_numbers"
+    });
+    loadLibrary ();
+});
+
+
+</script>
+
+</html>
+
