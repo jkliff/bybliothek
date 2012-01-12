@@ -10,10 +10,29 @@ body {
 #books {
     font-size: 10pt;
 }
+
+.book_add {
+    border: 1px solid black;
+    background: #EEE;
+    position: absolute;
+    top: 100px;
+}
+
+#log {
+    position: absolute;
+    left: 900px;
+    top: 100px;
+    width: 300px;
+    height: 150px;
+    scroll: always;
+}
+
 </style>
 <body>
 
 <h1>Biblioteca</h1>
+
+<input type="button" id="btn_add_book" value="Adicionar livro">
 
 <hr>
 
@@ -26,8 +45,12 @@ body {
 </body>
 
 <script type="text/javascript" src="jquery.js"></script>
-j<script type="text/javascript" src="jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="jquery.dataTables.min.js"></script>
 <script>
+
+function debug (msg) {
+    $('#log').append ($('<span />').text (msg)).append ('<br />');
+}
 
 function loadLibrary () {
     $.getJSON('list', function(data) {
@@ -40,16 +63,51 @@ function loadLibrary () {
     });
 }
 
+function addBook (isbn) {
+    $.post('add', {"isbn": isbn});
+
+}
+
 $(document).ready(function() {
+
+    $('#screens div').hide ()
+
+    $('#btn_add_book').bind ('click', function () {
+        var c = $('#screens .book_add');
+        c.show ();
+    });
+
+    $('#btn_add_book_submit').bind ('click', function () {
+        var c = $('#screens .book_add');
+        c.hide ();
+
+        var isbn = $('#fld_isbn').val();
+
+        addBook (isbn);
+
+    });
+
     $('#books').dataTable({
         'asSorting': [[2, 'asc']],
         "sPaginationType": "full_numbers"
     });
+
     loadLibrary ();
 });
 
 
 </script>
+
+<div id="screens">
+    <div class="book_add">
+        ISBN: 
+        <input type="text" id="fld_isbn">
+        <input type="button" id="btn_add_book_submit" value="Incluir">
+    </div>
+</div>
+
+<div id="log">
+</div>
 
 </html>
 

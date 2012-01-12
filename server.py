@@ -26,7 +26,7 @@ for i in files.keys():
 
 class list:
     def GET (self):
-        conn = psycopg2.connect ('dbname = books user=postgres')
+        conn = psycopg2.connect ('dbname = books user=john')
         cur = conn.cursor ()
         cur.execute ('select author, title, isbn from books.book')
         r = cur.fetchall ()
@@ -37,8 +37,19 @@ class list:
         return json.dumps (r)
 
 class add:
-    def POST(self, name):
-        pass
+    def POST(self):
+        data = web.data()
+        isbn = data.split ('=')
+        if isbn is not None:
+            conn = psycopg2.connect ('dbname = books user=john')
+            cur = conn.cursor ()
+            cur.execute ("""insert into books.book (isbn) values ('%s');""" % isbn[1])
+            conn.commit ()
+            cur.close()
+            conn.close()
+
+   
+
 class jquery_dataTables:
     def GET (self):
         global files
