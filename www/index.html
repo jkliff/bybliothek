@@ -79,6 +79,7 @@ $(document).ready(function() {
 
     $('#btn_add_book_submit').bind ('click', function () {
         var c = $('#screens .book_add');
+        c.val ('');
         c.hide ();
 
         var isbn = $('#fld_isbn').val();
