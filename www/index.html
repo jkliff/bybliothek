@@ -2,9 +2,11 @@
 
 <head>
 <title>Biblioteca</title>
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <style>
-body {
+/* body {
 	font-family: sans-serif;
 	font-size: 10pt;
 }
@@ -12,34 +14,60 @@ body {
 table {
 	font-size: 10pt;
 	border-spacing: 0px
-}
-
+} */
 #tbl_placeholder {
 	font-size: 8pt;
 }
-
+/*
 .book_add {
 	border: 1px solid black;
 	background: #EEE;
 	position: float;
 	top: 100px;
 }
-
-#float_placeholder {
-	border: 1px solid black;
-}
+*/
 </style>
-<body>
+<body data-spy="scroll" data-target=".subnav" data-offset="50">
 
-  <h1>Biblioteca</h1>
 
-  <div id="float_placeholder"></div>
-  <div id="tbl_placeholder"></div>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container"></div>
+    </div>
+  </div>
+  <div class="container">
+    <header class="jumbotron subhead">
+      <h1>Biblioteca</h1>
+    </header>
+
+
+
+    <section id="tbl_placeholder"></section>
+    <!-- section id="modals"-->
+      <div class="well">
+        <div id="modal_book_add" class="modal hide fade">
+          <div class="modal-header">
+            <a href="#" class="close" data-dismiss="modal">&times;</a>
+            <h3>Modal header</h3>
+
+
+          </div>
+          <div class="modal-body">
+            ISBN: <input type="text" id="fld_isbn">
+          </div>
+          <div class="modal-footer">
+            <button id="submit">Incluir</button>
+            <button id="cancel">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    <!-- /section-->
+    <footer class="footer">Footer
+    </footer>
+  </div> <!--  container -->
 
   <div id="template" style="display: none;">
-    <div class="book_add">
-      ISBN: <input type="text" id="fld_isbn"> <input type="button" id="btn_add_book_submit" value="Incluir">
-    </div>
+
 
     <div class="tmpl_book">
       <table>
@@ -69,7 +97,9 @@ table {
   <script type="text/javascript" src="js/jquery.tmpl.js"></script>
   <script type="text/javascript" src="js/underscore.js"></script>
   <script type="text/javascript" src="js/backbone.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script><script type="text/javascript" src="js/pybliothek.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/bootstrap-modal.js"></script>
+  <script type="text/javascript" src="js/pybliothek.js"></script>
 </body>
 </html>
 

@@ -14,21 +14,49 @@
         model : Book
     });
 
+    // line in the table
     var BookView = Backbone.View.extend({
         tagName : 'tr',
         template : $('#template .tmpl_book table tr').template(),
         render : function() {
-            
+
             $(this.el).html($.tmpl(this.template, this.model.toJSON()));
             return this;
         }
     });
 
-    
-    var BookAddView = Backbone.View.extend ({
-        
+    var BookAddView = Backbone.View.extend({
+        el : $('#modal_book_add'), // .template(),
+
+        events : {
+            'click button#submit' : 'submit',
+            'click button#cancel' : 'cancel'
+        },
+
+        initialize : function() {
+            _.bindAll(this, 'openNew', 'submit', 'cancel');
+
+            // var el = $.tmpl(this.template);
+            this.el = $(this.el).modal({
+                'show' : false
+            });
+            // this.el = el;
+        },
+
+        openNew : function() {
+            console.log($('#float_placeholder'));
+
+            // $('#float_placeholder').append (el);
+            this.el.modal('show');
+        },
+        submit : function() {
+            this.el.modal('hide');
+        },
+        cancel : function() {
+            this.el.modal('hide');
+        }
     });
-    
+
     var PybliothekView = Backbone.View.extend({
         el : $('#tbl_placeholder'),
         template : $('#template .tmpl_book_list').template(),
@@ -39,6 +67,8 @@
             this.collection = new BookList();
             this.collection.bind('reset', this.render);
 
+            // we hold one modal only
+            this.bookAddView = new BookAddView();
         },
 
         events : {
@@ -47,11 +77,9 @@
         },
 
         addBook : function() {
-            var v = $('#template .book_add').template ();
-            console.log ($('#float_placeholder'));
-            $('#float_placeholder').append ($.tmpl(v));
+            this.bookAddView.openNew();
         },
-        
+
         buildBookFromJSON : function(d) {
             var b = new Book();
 
@@ -64,7 +92,7 @@
             return b;
         },
         updateContent : function(data) {
-            console.log(data);
+            console.log('update');
             this.collection.reset(_.map(JSON.parse(data),
                     this.buildBookFromJSON));
         },
