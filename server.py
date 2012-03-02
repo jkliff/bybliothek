@@ -4,6 +4,7 @@ import os
 import pprint
 import datetime
 import psycopg2
+import isbn_finder
 
 CWD = os.path.dirname(os.path.abspath(__file__))
 
@@ -61,7 +62,7 @@ def load_book (id):
         return r
 
 def load_all_books ():
-    sql = 'select b_id, isbn, author, title from books.book order by b_id'
+    sql = 'select b_id, isbn, author, title, publisher from books.book order by b_id'
     global DB_CONF
     conn = psycopg2.connect (DB_CONF)
     c = conn.cursor ()
@@ -70,7 +71,7 @@ def load_all_books ():
     print r
     c.close()
     conn.close()
-    return map (lambda x: {'id': x[0], 'isbn': x[1], 'author': x[2], 'title': x[3]}, r)
+    return map (lambda x: {'id': x[0], 'isbn': x[1], 'author': x[2], 'title': x[3], 'publisher': x[4]}, r)
 
 def update_book (id, data):
     sql = 'update books.book set isbn = ?, author = ?, title = ? where b_id = ?'
@@ -110,7 +111,7 @@ class BookLookup:
         pass
     
     def GET (self, isbn):
-        print 'lookup', isbn
+        print isbn_finder.lookup_isbn(isbn)
         
 ##############################################################################
 

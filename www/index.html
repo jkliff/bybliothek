@@ -58,16 +58,10 @@ table {
               <label class="control-label">ISBN</label>
               <div class="controls">
                 <input type="text" id="fld_isbn">
-                <button id="lookup">Lookup</button>
+                <a class="btn" id="lookup">Lookup</a>
               </div>
             </div>
-            <div class="control-group">
-              <label class="control-label">db_id </label>
-              <div class="controls">
-            ${db_id}
-              </div>
-            </div>
-            
+
             <div class="control-group">
               <label class="control-label">author</label>
               <div class="controls">
@@ -88,8 +82,8 @@ table {
             </div>
         </div>
         <div class="modal-footer">
-          <button id="add">Add</button>
-          <button id="cancel">Cancel</button>
+          <a class="btn" id="add">Add</a>
+          <a class="btn" id="cancel">Cancel</a>
         </div>
       </div>
     </div>
@@ -107,16 +101,17 @@ table {
           <td class="isbn">${isbn}</td>
           <td class="author">${author}</td>
           <td class="title">${title}</td>
+          <td class="publisher">${publisher}</td>
           <td>
-            <button class="edit">View/Edit</button>
+            <a class="btn" class="btn edit">View/Edit</a>
           </td>
         </tr>
       </table>
     </div>
     <div class="tmpl_book_list">
       <div id="global_cmds">
-        <button id="refresh">Refresh</button>
-        <button id="add">Add book</button>
+        <a class="btn" id="refresh">Refresh</a>
+        <a class="btn" id="add">Add book</a>
       </div>
       <hr>
       <table class="list"></table>

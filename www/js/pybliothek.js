@@ -6,7 +6,8 @@
             isbn : null,
             author : null,
             title : null,
-            inserted : null
+            inserted : null,
+            publisher: null
         }
     });
 
@@ -29,14 +30,14 @@
         el : $('#modal_book_add'), // .template(),
 
         events : {
-            'click button#lookup' : 'lookup',
-            'click button#add' : 'add',
-            'click button#cancel' : 'cancel'
+            'click a#lookup' : 'lookup',
+            'click a#add' : 'add',
+            'click a#cancel' : 'cancel'
         },
 
         initialize : function() {
             _.bindAll(this, 'openNew', 'lookup', 'fillLookupData', 'add',
-                    'cancel', 'render');
+                    'cancel');
 
             this.el = $(this.el).modal({
                 'show' : false
@@ -45,10 +46,6 @@
             // book to be filled on lookup
             // this.model = new Book();
             // this.model.bind('reset', this.render);
-        },
-
-        render : function() {
-
         },
 
         openNew : function() {
@@ -67,7 +64,7 @@
             });
         },
         fillLookupData : function(data) {
-            this.el
+            console.log (data);
             
         },
         add : function() {
@@ -93,8 +90,8 @@
         },
 
         events : {
-            'click button#refresh' : 'load',
-            'click button#add' : 'addBook'
+            'click a#refresh' : 'load',
+            'click a#add' : 'addBook'
         },
 
         addBook : function() {
@@ -108,7 +105,8 @@
                 isbn : d.isbn,
                 author : d.author,
                 title : d.title,
-                id : d.id
+                id : d.id,
+                publisher: d.publisher
             });
             return b;
         },
