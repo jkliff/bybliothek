@@ -111,7 +111,8 @@ class BookLookup:
         pass
     
     def GET (self, isbn):
-        print isbn_finder.lookup_isbn(isbn)
+        return json.dumps(isbn_finder.lookup_isbn(isbn))
+
         
 ##############################################################################
 

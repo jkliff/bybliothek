@@ -7,7 +7,7 @@
             author : null,
             title : null,
             inserted : null,
-            publisher: null
+            publisher : null
         }
     });
 
@@ -53,7 +53,7 @@
             this.el.modal('show');
         },
         lookup : function() {
-            console.log ($('#fld_isbn').val());
+            console.log($('#fld_isbn').val());
             $.ajax({
                 type : 'GET',
                 url : '/lookup',
@@ -64,8 +64,12 @@
             });
         },
         fillLookupData : function(data) {
-            console.log (data);
-            
+            var d = JSON.parse(data);
+
+            $('#modal_book_add #title').val (d.title);
+            $('#modal_book_add #author').val (d.author);
+            $('#modal_book_add #publisher').val (d.publisher);
+
         },
         add : function() {
             this.el.modal('hide');
@@ -106,7 +110,7 @@
                 author : d.author,
                 title : d.title,
                 id : d.id,
-                publisher: d.publisher
+                publisher : d.publisher
             });
             return b;
         },
