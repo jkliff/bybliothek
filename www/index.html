@@ -3,7 +3,7 @@
 <head>
 <title>Biblioteca</title>
 <link href="css/bootstrap.css" rel="stylesheet">
-<link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <style>
 /* body {
@@ -44,27 +44,59 @@ table {
 
     <section id="tbl_placeholder"></section>
     <!-- section id="modals"-->
-      <div class="well">
-        <div id="modal_book_add" class="modal hide fade">
-          <div class="modal-header">
-            <a href="#" class="close" data-dismiss="modal">&times;</a>
-            <h3>Include book</h3>
+    <div class="well">
+      <div id="modal_book_add" class="modal hide fade">
+        <div class="modal-header">
+          <a href="#" class="close" data-dismiss="modal">&times;</a>
+          <h3>Include book</h3>
 
 
-          </div>
-          <div class="modal-body">
-            ISBN: <input type="text" id="fld_isbn">
-          </div>
-          <div class="modal-footer">
-            <button id="submit">Include</button>
-            <button id="cancel">Cancel</button>
-          </div>
+        </div>
+        <div class="modal-body">
+          <form class="well form-horizontal">
+            <div class="control-group">
+              <label class="control-label">ISBN</label>
+              <div class="controls">
+                <input type="text" id="fld_isbn">
+                <button id="lookup">Lookup</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">db_id </label>
+              <div class="controls">
+            ${db_id}
+              </div>
+            </div>
+            
+            <div class="control-group">
+              <label class="control-label">author</label>
+              <div class="controls">
+                <input type="text" id="author">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">title</label>
+              <div class="controls">
+                <input type="text" id="title">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">inserted</label>
+              <div class="controls">
+                <input type="text" id="inserted">
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button id="add">Add</button>
+          <button id="cancel">Cancel</button>
         </div>
       </div>
+    </div>
     <!-- /section-->
-    <footer class="footer">Footer
-    </footer>
-  </div> <!--  container -->
+    <footer class="footer">Footer </footer>
+  </div>
+  <!--  container -->
 
   <div id="template" style="display: none;">
 

@@ -18,7 +18,7 @@ STATIC_CONF = {
     }
 }
 
-BOOK_CONF = {'/': {
+REST_CONF = {'/': {
         'request.dispatch': cherrypy.dispatch.MethodDispatcher ()
     }
 }
@@ -78,27 +78,41 @@ def update_book (id, data):
 def remove_book (id):
     sql = 'delete from books.book where b_id = ?'
 
+##############################################################################
+
 class BooksREST:
     exposed = True
     def __init__ (self):
-        #self._respository = init_repository ()
         pass
+    
     def GET (self, id=None):
         print id
         print 'get', id
         if id is not None:
             return json.dump (load_book (id))
-            
         else:
             return json.dumps (load_all_books())
+        
     def POST (self, id, data):
         update_book (id, json.reads (data))
-    def PUT (self, data):
         
+    def PUT (self, data):
         r = insert_book (json.reads (data)['isbn'])
         return json.dumps (r)
+    
     def DELETE (self, id):
         remove_book (id)
+
+
+class BookLookup:
+    exposed = True
+    def __init__ (self):
+        pass
+    
+    def GET (self, isbn):
+        print 'lookup', isbn
+        
+##############################################################################
 
 def parse_opts ():
     from argparse import ArgumentParser
@@ -121,7 +135,8 @@ def main ():
     })
 
     cherrypy.tree.mount (Root(), '/', config=STATIC_CONF)
-    cherrypy.tree.mount (BooksREST(), '/book', config=BOOK_CONF)
+    cherrypy.tree.mount (BooksREST(), '/catalog', config=REST_CONF)
+    cherrypy.tree.mount (BookLookup(), '/lookup', config=REST_CONF)
 
     cherrypy.engine.start()
     cherrypy.engine.block()

@@ -29,27 +29,48 @@
         el : $('#modal_book_add'), // .template(),
 
         events : {
-            'click button#submit' : 'submit',
+            'click button#lookup' : 'lookup',
+            'click button#add' : 'add',
             'click button#cancel' : 'cancel'
         },
 
         initialize : function() {
-            _.bindAll(this, 'openNew', 'submit', 'cancel');
+            _.bindAll(this, 'openNew', 'lookup', 'fillLookupData', 'add',
+                    'cancel', 'render');
 
-            // var el = $.tmpl(this.template);
             this.el = $(this.el).modal({
                 'show' : false
             });
-            // this.el = el;
+
+            // book to be filled on lookup
+            // this.model = new Book();
+            // this.model.bind('reset', this.render);
+        },
+
+        render : function() {
+
         },
 
         openNew : function() {
-            console.log($('#float_placeholder'));
-
-            // $('#float_placeholder').append (el);
+            // console.log($('#float_placeholder'));
             this.el.modal('show');
         },
-        submit : function() {
+        lookup : function() {
+            console.log ($('#fld_isbn').val());
+            $.ajax({
+                type : 'GET',
+                url : '/lookup',
+                data : {
+                    'isbn' : $('#fld_isbn').val()
+                },
+                success : this.fillLookupData
+            });
+        },
+        fillLookupData : function(data) {
+            this.el
+            
+        },
+        add : function() {
             this.el.modal('hide');
         },
         cancel : function() {
@@ -113,7 +134,7 @@
         load : function() {
             $.ajax({
                 type : 'GET',
-                url : '/book',
+                url : '/catalog',
                 success : this.updateContent
             });
         }
